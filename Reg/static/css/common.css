@@ -1,0 +1,33 @@
+body
+{
+    border:0px;
+}
+
+
+
+
+
+.rightmenu
+{
+    float:right;
+}
+
+
+
+
+.container
+{
+    width:1000px;
+    height:100px;
+    background-color:black;
+    line-height:100px;
+    color:red;
+    margin:0 auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.container a
+{
+   color: yellow;
+}
