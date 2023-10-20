@@ -10,6 +10,16 @@ def viewCourses(request):
         return render(request, 'viewCourses.html', {'Courses': Courses})
 
 
+def viewProfile(request):
+
+        Courses = Course.objects.all()
+        print(Courses)
+        return render(request, 'viewProfile.html', {'Courses': Courses})
 
 
+def viewOneCourse(request):
+
+        Courses = Course.objects.all()
+        print(Courses)
+        return render(request, 'viewOneCourse.html', {'Courses': Courses})
 
