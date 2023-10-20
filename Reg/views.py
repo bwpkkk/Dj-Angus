@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse ,HttpResponseRedirect
-from .models import User, Teacher
+from .models import User, Teacher, Course,Question,Student
 from.forms import UserFrom
 
 
@@ -46,10 +46,12 @@ def UserRegister(request):
         except Exception as e:
             print('-- error2 %s' %(e) )
 
-
+        teachers = Teacher.objects.all()
+        img = User.profile_picture
+        Courses = Course.objects.all()
        # request.session['username'] = username  # store them into the session dictionary
        # request.session['uid'] = User.id
-        return render(request, 'index/index.html')
+        return render(request, 'index/index.html',{'img': img, 'teachers': teachers,'courses': Courses})
 
 def UserLogin(request):
 
@@ -72,20 +74,26 @@ def UserLogin(request):
             return HttpResponse("Incorrect username or password ")      #if there is exception, return error page
 
         try:
-            student=User.objects.get(username=username,password=pswd)
+            user=User.objects.get(username=username,password=pswd)
         except Exception as e:
             print('--login user error 2 %s' % (e))
             return HttpResponse("Incorrect username or password ")
 
         request.session['username']=username                               #store them into the session dictionary
-        request.session['uid']=student.id
+        request.session['uid']=user.id
 
-        img=student.profile_picture
-        teachers = Teacher.objects.all()
+        img=user.profile_picture
+        teachers = Teacher.objects.all()          #fetch all the teacher obects, courses objects, and the profile image of current user.
+        Courses = Course.objects.all()
 
-        print (student.profile_picture)
-       # return HttpResponseRedirect('/index/',{'img':img})
-        return render(request, 'index/index.html',{'img':img,'teachers':teachers})
+        # If the user is a student:
+        if user.isStudent==True:
+            return render(request, 'index/index.html', {'img': img, 'teachers': teachers, 'courses': Courses})
+        # If the user is a teacher ( modify indexforteacher.html so that it returns a page for teachers):
+        else:
+            return HttpResponse("Teacher Page")
+
+
 # Create your views here.
 
 def UserLogout(request):
