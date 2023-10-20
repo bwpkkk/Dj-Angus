@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="{%static 'plugins/bootstrap-3.4.1-dist/css/bootstrap.css'%}">
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="{%static  'plugins/bootstrap-3.4.1-dist/js/bootstrap.min.js'%}"></script>
-     <style>
-         .media-heading:hover{
-           color: white;
-         }
-        .media-heading {color: green;}
-     </style>
+    <style>
+        .media-heading:hover{
+          color: white;
+        }
+       .media-heading {color: green;}
+    </style>
     <!--<link rel="stylesheet" href="/static/plugins/bootstrap-3.4.1-dist/bootstrap.min.css">-->
 </head>
 <body>
@@ -62,14 +62,12 @@
                 {%if request.session.username %}
 
 
-
-
                 <li><a>Welcome, {{ request.session.username}}</a></li>
 
-                 {%if img %}
-                 <li><img src='{{img.url}}' style="margin-top:12px" alt=" "width="25" height="25" ></li>
+                {%if img %}
+                <li><img src='{{img.url}}' style="margin-top:12px" alt=" " width="25" height="25"></li>
 
-                 {%endif%}
+                {%endif%}
 
                 <li class="dropdown">
                     <a href="/index" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -99,32 +97,94 @@
 
 <div class="container-fluid clearfix ">
     <div class="col-sm-9">
-        {%if request.session.username %}
-        <h2 style="text-align:center ; color:#b0b0b0 ;" >Popular Tutors:</h2>
-        {%else%}
-        <h2 style="text-align:center ; color:#b0b0b0 ;" >Login to see our resources</h2>
-        {%endif%}
-        {%for teacher in teachers%}
-        <div class="media" style="background-color:pink; font-family:Microsoft YaHei">
-            <div class="media-left">
-                <a href="#">
-                    <img class="media-object" data-src="holder.js/64x64" alt="64x64"
-                         src="{{teacher.profile_picture.url}}"
-                         data-holder-rendered="true" style="width: 64px; height: 64px;">
-                </a>
-            </div>
-            <div class="media-body">
-                <h4 class="media-heading" >{{teacher.specialty}} teacher:<a href> {{teacher.username}}</a></h4>
-                {{teacher.personal_Bio}}
 
+        <div>
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab"
+                                                          data-toggle="tab">Teacher</a></li>
+                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab"
+                                           data-toggle="tab">Courses</a></li>
+
+                <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Questions</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="home">
+
+
+                    {%if request.session.username %}
+                    <h2 style="text-align:center ; color:#b0b0b0 ;">Popular Tutors:</h2>
+                    {%for teacher in teachers%}
+                    <div class="media" style="background-color:pink; font-family:Microsoft YaHei">
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object" data-src="holder.js/64x64" alt="64x64"
+                                     src="{{teacher.profile_picture.url}}"
+                                     data-holder-rendered="true" style="width: 64px; height: 64px;">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">{{teacher.specialty}} teacher:<a href> {{teacher.username}}</a>
+                            </h4>
+                            {{teacher.personal_Bio}}
+
+                        </div>
+
+                    </div>
+
+                    <br>
+                    <br>
+
+                    {%endfor%}
+
+                    {%else%}
+                    <h2 style="text-align:center ; color:#b0b0b0 ;">Login to see our resources</h2>
+
+
+                    {%endif%}
+
+
+
+                </div>
+                <div role="tabpanel" class="tab-pane" id="profile">
+                     {%if request.session.username %}
+                    <h2 style="text-align:center ; color:#b0b0b0 ;">Courses:</h2>
+                    {%else%}
+                    <h2 style="text-align:center ; color:#b0b0b0 ;">Login to see our resources</h2>
+                    {%endif%}
+
+                    <div class="row">
+                        {%for course in courses%}
+                        <div class="col-sm-6 col-md-4">
+
+
+                            <div class="thumbnail">
+                                <img src='{{course.course_picture.url}}' alt="..." width="242" height="200"/>
+                                <div class="caption">
+                                    <h3>{{course.course_name}}</h3>
+                                    <p style="font-family: serif">by Teacher: {{course.owner}}</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#"
+                                                                                                       class="btn btn-default"
+                                                                                                       role="button">Button</a>
+                                    </p>
+                                </div>
+                            </div>
+
+
+                        </div>
+                         {%endfor%}
+                    </div>
+
+                </div>
+                <div role="tabpanel" class="tab-pane" id="messages">pbw</div>
+                <div role="tabpanel" class="tab-pane" id="settings">...</div>
             </div>
 
         </div>
-
-        <br>
-        <br>
-
-        {%endfor%}
 
 
     </div>
@@ -133,8 +193,9 @@
         <div class="panel panel-primary">
             <div class="panel-heading">I want to:</div>
             <div class="panel-body">
-                <p> <a class="btn btn-success" href="/teacher/viewCourses">View Courses</a></p>
-                <p><p class="btn btn-success">Post Questions</a></p>
+                <p><a class="btn btn-success" href="/teacher/viewCourses">View Courses</a></p>
+                <p>
+                <p class="btn btn-success">Post Questions</a></p>
 
             </div>
         </div>
