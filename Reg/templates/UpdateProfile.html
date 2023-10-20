@@ -2,12 +2,16 @@
 {% block content%}
 
 
-    <form method="post"  enctype="multipart/form-data" style="padding-left:350px; padding-top:100px">
+    <form method="post"  enctype="multipart/form-data" style="padding-left:350px; padding-top:50px; margin:auto;">
 
-            {{form1.as_p}}
+            {%for field in form1%}
 
-
-        <input type="submit" value="save">
+            <div class="form-group"  style="width:500px;padding-top :25px">
+                <label>{{field.label}}:</label>
+                {{field}}
+            </div>
+            {%endfor%}
+        <input type="submit" class ="btn btn-primary "value="save" style=" margin-top:20px; width:100px ;height: 50px"  >
     </form>
 
 
