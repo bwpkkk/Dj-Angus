@@ -10,7 +10,7 @@ class User(models.Model):
     DateofBirth = models.DateField("Date of Birth",auto_now_add=False,blank=True,null=True)
     isStudent=models.BooleanField(default=False)
     profile_picture=models.ImageField("Profile Picture",upload_to='media/profile_pictures',blank=True,null=True)
-    personal_Bio=models.CharField("Bio", max_length=200,blank=True, null=True )
+    personal_Bio=models.CharField("Bio", max_length=400,blank=True, null=True )
 
     class meta:
         abstract = True
