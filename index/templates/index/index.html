@@ -119,16 +119,16 @@
                     {%if request.session.username %}
                     <h2 style="text-align:center ; color:#b0b0b0 ;">Popular Tutors:</h2>
                     {%for teacher in teachers%}
-                    <div class="media" style="background-color:pink; font-family:Microsoft YaHei">
+                    <div class="media" style="background-color:pink; font-family:Consolas;">
                         <div class="media-left">
-                            <a href="#">
+                            <a href="/teacher/viewProfile/?nid={{teacher.id}}">
                                 <img class="media-object" data-src="holder.js/64x64" alt="64x64"
                                      src="{{teacher.profile_picture.url}}"
-                                     data-holder-rendered="true" style="width: 64px; height: 64px;">
+                                     data-holder-rendered="true" style="width: 64px; height: 64px; padding-bottom:auto;">
                             </a>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading">{{teacher.specialty}} teacher:<a href> {{teacher.username}}</a>
+                            <h4 class="media-heading">{{teacher.specialty}} teacher:<a href="/teacher/viewProfile/?nid={{teacher.id}}"> {{teacher.username}}</a>
                             </h4>
                             {{teacher.personal_Bio}}
 
@@ -163,13 +163,11 @@
 
 
                             <div class="thumbnail">
-                                <img src='{{course.course_picture.url}}' alt="..." width="242" height="200"/>
+                                <img src='{{course.course_picture.url}}' alt="..." style="width:242px;  height:200px" />
                                 <div class="caption">
                                     <h3>{{course.course_name}}</h3>
                                     <p style="font-family: serif">by Teacher: {{course.owner}}</p>
-                                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#"
-                                                                                                       class="btn btn-default"
-                                                                                                       role="button">Button</a>
+                                    <p><a href="#" class="btn btn-primary" role="button">View this course</a>
                                     </p>
                                 </div>
                             </div>
@@ -201,7 +199,7 @@
         </div>
 
         <div class="panel panel-info">
-            <div class="panel-heading">Recommended:</div>
+            <div class="panel-heading">My teachers:</div>
             <div class="panel-body">Panel content</div>
         </div>
 
