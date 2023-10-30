@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 
 urlpatterns=[
 
-    path('viewCourses',views.viewCourses),
-    path('viewProfile',views.viewProfile),
-    path('viewOneCourse',views.viewOneCourse),
+    path('viewCourses/',views.viewCourses),
+    path('viewProfile/',views.viewProfile),
+
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

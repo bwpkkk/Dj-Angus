@@ -9,17 +9,28 @@ def viewCourses(request):
         print(Courses)
         return render(request, 'viewCourses.html', {'Courses': Courses})
 
-
+import random
 def viewProfile(request):
 
-        Courses = Course.objects.all()
-        print(Courses)
-        return render(request, 'viewProfile.html', {'Courses': Courses})
+        nid=request.GET.get('nid')
+        teacher = Teacher.objects.get(pk=nid)
+
+        count=Teacher.objects.exclude(pk=nid).count()
+
+        teachers=Teacher.objects.exclude(pk=nid)
+
+        newqs=[]
+
+        i = 0
+        while i < 3:
+           newqs.append(teachers[i])
+           i += 1
+
+        print (newqs)
+        print(teachers)
 
 
-def viewOneCourse(request):
+        return render(request, 'viewProfile.html', {'Teacher': teacher,'Teachers': newqs})
 
-        Courses = Course.objects.all()
-        print(Courses)
-        return render(request, 'viewOneCourse.html', {'Courses': Courses})
+
 
